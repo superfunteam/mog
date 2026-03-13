@@ -388,3 +388,75 @@ html, body, #root {
     padding: 12px;
   }
 }
+
+/* ░░░ SAMPLE PICKER ░░░ */
+.sample-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(59, 50, 40, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.sample-picker {
+  background: var(--white);
+  border: 2px solid var(--black);
+  width: 380px;
+  max-width: calc(100vw - 32px);
+  max-height: calc(100vh - 64px);
+  display: flex;
+  flex-direction: column;
+}
+
+.sample-picker-header {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--gray);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}
+
+.sample-picker-list {
+  overflow-y: auto;
+}
+
+.sample-option {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  width: 100%;
+  padding: 12px 16px;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--gray);
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--font);
+}
+
+.sample-option:last-child {
+  border-bottom: none;
+}
+
+.sample-option:hover {
+  background: var(--accent);
+}
+
+.sample-option-name {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--black);
+  letter-spacing: 1px;
+}
+
+.sample-option-desc {
+  font-size: 10px;
+  color: var(--mid);
+  letter-spacing: 0.5px;
+}
