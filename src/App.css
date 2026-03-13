@@ -118,6 +118,44 @@ html, body, #root {
   background: var(--accent);
 }
 
+/* ░░░ COLUMN SETTING ░░░ */
+.column-setting {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-top: 1px solid var(--gray);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--mid);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.column-setting:hover {
+  color: var(--black);
+}
+
+.column-setting input[type="checkbox"] {
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  border: 2px solid var(--mid);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.column-setting input[type="checkbox"]:checked {
+  background: var(--black);
+  border-color: var(--black);
+}
+
+.column-setting input[type="checkbox"]:hover {
+  border-color: var(--black);
+}
+
 /* ░░░ BUTTONS ░░░ */
 .btn {
   background: var(--black);

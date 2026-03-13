@@ -26,7 +26,7 @@ export default async (req) => {
     return new Response("Invalid JSON", { status: 400 });
   }
 
-  const { source, template } = body;
+  const { source, template, forbidReorder } = body;
 
   if (!source || !template) {
     return new Response("Missing source or template", { status: 400 });
@@ -41,7 +41,7 @@ export default async (req) => {
     messages: [
       {
         role: "user",
-        content: `=== SOURCE CONTENT ===\n${source}\n\n=== TEMPLATE RAILS ===\n${template}\n\n=== INSTRUCTIONS ===\nTransmogrify the source content into the template format. Repeat the template pattern as many times as needed. Account for every word in the source. Output ONLY the transmogrified result, no commentary.`,
+        content: `=== SOURCE CONTENT ===\n${source}\n\n=== TEMPLATE RAILS ===\n${template}\n\n=== INSTRUCTIONS ===\nTransmogrify the source content into the template format. Repeat the template pattern as many times as needed. Account for every word in the source.${forbidReorder ? "\n\nCRITICAL: FORBID REORDER is ON. You MUST preserve the exact order of content as it appears in the source. Do NOT rearrange, regroup, or reorder any content to match the template's ordering. Process the source content strictly top-to-bottom, applying the template format to each piece in the order it originally appears." : "\n\nYou may reorder content to best fit the template structure."} Output ONLY the transmogrified result, no commentary.`,
       },
     ],
   });

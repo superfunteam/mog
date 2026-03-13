@@ -5,6 +5,7 @@ function App() {
   const [template, setTemplate] = useState("");
   const [output, setOutput] = useState("");
   const [loading, setLoading] = useState(false);
+  const [forbidReorder, setForbidReorder] = useState(false);
   const abortRef = useRef(null);
 
   const loadFile = (setter) => {
@@ -33,7 +34,7 @@ function App() {
       const res = await fetch("/api/transmogrify", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ source, template }),
+        body: JSON.stringify({ source, template, forbidReorder }),
         signal: abortRef.current.signal,
       });
 
@@ -102,6 +103,14 @@ function App() {
             onChange={(e) => setSource(e.target.value)}
             placeholder="Paste source content or load a file..."
           />
+          <label className="column-setting">
+            <input
+              type="checkbox"
+              checked={forbidReorder}
+              onChange={(e) => setForbidReorder(e.target.checked)}
+            />
+            <span>FORBID REORDER</span>
+          </label>
         </div>
 
         {/* COLUMN 2 — TEMPLATE RAILS */}
