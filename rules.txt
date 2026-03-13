@@ -1,0 +1,20 @@
+let's make a simple "change this content source words to that content source template" tool, called "mog", short for "transmogrify"
+
+The layout should just be three full-height text inputs or text areas in three columns:
+1. Column one should be the source content.
+2. Column two should be the template rails, from WordPress blocks or a CSV or some other plain text rails that you need to follow.
+3. Column three will be the output.
+The goal is to let the user paste content into column one, like a long form document or something from an agent, or report, or plain text. Then in column two we'll paste in template rails from WordPress blocks or a CSV or some other plain text rails that you need to follow. Whenever they submit we're going to run both through the Netlify AI Gateway to check with Claude (AKA you, Claude Opus 4.6 max) to compare The source content in column one with the template rails in column two, and translate or parse or transmogrify the source content into the template rails. 
+
+The words and content in Column 1 should be treated as absolute law. Every single word needs to be accounted for in our output and the content template rails in Column 2 should be treated as repeatable and reusable. For example if there is a single paragraph example in the rails but the content source has twenty paragraphs, the resulting output should have twenty paragraphs, each using our new content rails from the paragraph in Column 2. It's kinda like Mad Libs, where we take all the words and all the things in column one, make sure it's all accounted for, and put them in a Wrapper from the rails in column two and then the AI gateway should return them from column three. 
+
+This is going to be deployed and hosted with Netlify, which offers the Netlify gateway so find and check those docs online. If you set everything up correctly, you won't need to define any environment variables or API keys. Everything will just be ready to go. When you find the docs, make sure you install the SDK, the Anthropic SDK, and use it with the Netlify gateway, Netlfy-Ai gateway. The end goal here is that a non-technical user can:
+1. Paste a long-form plain text document into column one.
+2. Paste a WordPress block plain text layout into column two.
+3. Press submit and get back a block ready with perfect content in column three.
+
+https://docs.netlify.com/build/ai-gateway/overview/
+https://docs.netlify.com/build/ai-gateway/quickstart-for-ai-gateway/
+
+Use an ultra brutalist layout and design style with monospaced fonts and only these ASCII characters for icons, drop shadows, and lines. █▓▒░ 
+
