@@ -265,23 +265,40 @@ html, body, #root {
   background: #4a7;
   margin-right: 8px;
   vertical-align: middle;
-  box-shadow: 0 0 4px #4a7, 0 0 8px #4a744;
+  box-shadow: 0 0 4px #4a7, 0 0 8px rgba(68,170,119,0.3);
   animation: glow 2s ease-in-out infinite;
 }
 
-@keyframes glow {
-  0%, 100% { box-shadow: 0 0 4px #4a7, 0 0 8px #4a744; }
-  50% { box-shadow: 0 0 6px #4a7, 0 0 14px #4a766; }
+.status-dot-active {
+  background: #ff6b6b;
+  box-shadow: 0 0 4px #ff6b6b, 0 0 8px rgba(255,107,107,0.3);
+  animation: glow-salmon 2s ease-in-out infinite;
 }
 
-/* ░░░ LOADING ░░░ */
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.3; }
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 4px #4a7, 0 0 8px rgba(68,170,119,0.3); }
+  50% { box-shadow: 0 0 6px #4a7, 0 0 14px rgba(68,170,119,0.4); }
+}
+
+@keyframes glow-salmon {
+  0%, 100% { box-shadow: 0 0 4px #ff6b6b, 0 0 8px rgba(255,107,107,0.3); }
+  50% { box-shadow: 0 0 8px #ff6b6b, 0 0 16px rgba(255,107,107,0.5); }
+}
+
+/* ░░░ ANIMATED DOTS ░░░ */
+.dots::after {
+  content: "";
+  animation: dots 1.5s steps(4, end) infinite;
+}
+
+@keyframes dots {
+  0% { content: ""; }
+  25% { content: "."; }
+  50% { content: ".."; }
+  75% { content: "..."; }
 }
 
 .loading .footer-status {
-  animation: blink 1s infinite;
   color: var(--black);
 }
 

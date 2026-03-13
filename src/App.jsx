@@ -10,8 +10,10 @@ function App() {
   const [forbidReorder, setForbidReorder] = useState(() => localStorage.getItem("mog-forbidReorder") === "true");
   const [activeTab, setActiveTab] = useState(0);
   const [logoText, setLogoText] = useState("█▓▒░ MOG ░▒▓█");
+  const [streaming, setStreaming] = useState(false);
   const abortRef = useRef(null);
   const shuffleRef = useRef(null);
+  const outputRef = useRef(null);
 
   const LOGO_DEFAULT = "█▓▒░ MOG ░▒▓█";
   const GLYPHS = ["█", "▓", "▒", "░"];
@@ -90,6 +92,9 @@ function App() {
           result += pending;
           pending = "";
           setOutput(result);
+          if (outputRef.current) {
+            outputRef.current.scrollTop = outputRef.current.scrollHeight;
+          }
         }
         rafId = requestAnimationFrame(flush);
       };
@@ -98,13 +103,16 @@ function App() {
       while (true) {
         const { done, value } = await reader.read();
         if (done) break;
-        if (first) { stopShuffle(); first = false; }
+        if (first) { stopShuffle(); setStreaming(true); first = false; }
         pending += decoder.decode(value, { stream: true });
       }
 
       cancelAnimationFrame(rafId);
       result += pending;
       setOutput(result);
+      if (outputRef.current) {
+        outputRef.current.scrollTop = outputRef.current.scrollHeight;
+      }
     } catch (err) {
       stopShuffle();
       if (err.name !== "AbortError") {
@@ -112,6 +120,7 @@ function App() {
       }
     } finally {
       setLoading(false);
+      setStreaming(false);
     }
   };
 
@@ -199,6 +208,7 @@ function App() {
             <div className="column-sub">█▓▒░░░░░░░░░░░░░░░░░░░▒▓█</div>
           </div>
           <textarea
+            ref={outputRef}
             value={output}
             readOnly
             placeholder="░░░ Output will stream here ░░░"
@@ -215,7 +225,9 @@ function App() {
       <footer className="footer">
         <span className="footer-decoration">▓▒░</span>
         <span className="footer-status">
-          {loading ? "░▒▓ TRANSMOGRIFYING ▓▒░" : <><span className="status-dot" />API READY</>}
+          <span className={`status-dot ${streaming ? "status-dot-active" : ""}`} />
+          {loading ? "MOGGING" : "API READY"}
+          {loading && <span className="dots" />}
         </span>
         <span className="footer-decoration">wims.vc ░▒▓</span>
       </footer>
