@@ -1,42 +1,210 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+:root {
+  --black: #0a0a0a;
+  --white: #f0f0f0;
+  --gray: #2a2a2a;
+  --mid: #666;
+  --light: #ccc;
+  --font: "JetBrains Mono", monospace;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+html, body, #root {
+  height: 100%;
+  background: var(--black);
+  color: var(--white);
+  font-family: var(--font);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
 }
 
-.card {
-  padding: 2em;
+/* ░░░ HEADER ░░░ */
+.header {
+  padding: 12px 20px;
+  border-bottom: 2px solid var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
 }
 
-.read-the-docs {
-  color: #888;
+.header h1 {
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+}
+
+.header-decoration {
+  font-size: 14px;
+  color: var(--mid);
+  letter-spacing: 2px;
+}
+
+/* ░░░ COLUMNS ░░░ */
+.columns {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+}
+
+.column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.column:not(:last-child) {
+  border-right: 2px solid var(--white);
+}
+
+.column-header {
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--gray);
+  flex-shrink: 0;
+}
+
+.column-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.column-decoration {
+  font-size: 10px;
+  color: var(--mid);
+  line-height: 1;
+}
+
+.column-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+/* ░░░ TEXTAREA ░░░ */
+.column textarea {
+  flex: 1;
+  width: 100%;
+  background: var(--black);
+  color: var(--white);
+  border: none;
+  outline: none;
+  resize: none;
+  padding: 16px;
+  font-family: var(--font);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.column textarea::placeholder {
+  color: var(--gray);
+}
+
+.column textarea:focus {
+  background: #111;
+}
+
+/* ░░░ BUTTONS ░░░ */
+.btn {
+  background: var(--white);
+  color: var(--black);
+  border: none;
+  padding: 4px 12px;
+  font-family: var(--font);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: none;
+}
+
+.btn:hover {
+  background: var(--black);
+  color: var(--white);
+  outline: 2px solid var(--white);
+}
+
+.btn:active {
+  background: var(--mid);
+  color: var(--black);
+}
+
+.btn-file {
+  background: transparent;
+  color: var(--mid);
+  outline: 1px solid var(--gray);
+}
+
+.btn-file:hover {
+  color: var(--white);
+  outline: 1px solid var(--white);
+  background: transparent;
+}
+
+/* ░░░ FOOTER / SUBMIT ░░░ */
+.footer {
+  border-top: 2px solid var(--white);
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+
+.btn-submit {
+  background: var(--white);
+  color: var(--black);
+  padding: 10px 32px;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 4px;
+}
+
+.btn-submit:disabled {
+  background: var(--gray);
+  color: var(--mid);
+  cursor: not-allowed;
+  outline: none;
+}
+
+.btn-submit:disabled:hover {
+  background: var(--gray);
+  color: var(--mid);
+  outline: none;
+}
+
+.footer-status {
+  font-size: 11px;
+  color: var(--mid);
+  letter-spacing: 2px;
+}
+
+.footer-decoration {
+  font-size: 14px;
+  color: var(--gray);
+}
+
+/* ░░░ LOADING ░░░ */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.loading .footer-status {
+  animation: blink 1s infinite;
+  color: var(--white);
 }
