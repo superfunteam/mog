@@ -135,6 +135,17 @@ html, body, #root {
   color: var(--black);
 }
 
+.link-static {
+  background: transparent;
+  border: none;
+  color: var(--mid);
+  font-family: var(--font);
+  font-size: 10px;
+  padding: 0;
+  display: inline-block;
+  line-height: normal;
+}
+
 .column-actions {
   display: flex;
   gap: 8px;

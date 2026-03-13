@@ -214,6 +214,7 @@ function App() {
               <div className="column-label">░ Output</div>
               {output && <button className="btn-clear" onClick={() => setOutput("")}>CLEAR</button>}
             </div>
+            <div className="column-sub"><span className="link-static">Ready for input</span></div>
             <div className="column-fill">{fillBar(output.length, Math.max(source.length, 1))}</div>
           </div>
           <textarea
