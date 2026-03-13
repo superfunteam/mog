@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import sampleSource from "./sample-source.js";
 import sampleTemplate from "./sample-template.js";
+import WelcomeModal from "./WelcomeModal.jsx";
 
 function App() {
   const [source, setSource] = useState(() => localStorage.getItem("mog-source") || "");
@@ -14,6 +15,7 @@ function App() {
   const abortRef = useRef(null);
   const shuffleRef = useRef(null);
   const outputRef = useRef(null);
+  const [showWelcome, setShowWelcome] = useState(() => !localStorage.getItem("mog-welcomed"));
 
   const LOGO_DEFAULT = "█▓▒░ MOG ░▒▓█";
   const GLYPHS = ["█", "▓", "▒", "░"];
@@ -250,6 +252,13 @@ function App() {
           {activeTab === 2 ? "█" : "░"} OUT
         </button>
       </nav>
+
+      {showWelcome && (
+        <WelcomeModal onDismiss={() => {
+          setShowWelcome(false);
+          localStorage.setItem("mog-welcomed", "1");
+        }} />
+      )}
     </div>
   );
 }
