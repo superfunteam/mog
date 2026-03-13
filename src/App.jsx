@@ -7,7 +7,26 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [forbidReorder, setForbidReorder] = useState(() => localStorage.getItem("mog-forbidReorder") === "true");
   const [activeTab, setActiveTab] = useState(0);
+  const [logoText, setLogoText] = useState("█▓▒░ MOG ░▒▓█");
   const abortRef = useRef(null);
+  const shuffleRef = useRef(null);
+
+  const LOGO_DEFAULT = "█▓▒░ MOG ░▒▓█";
+  const GLYPHS = ["█", "▓", "▒", "░"];
+
+  const startShuffle = () => {
+    shuffleRef.current = setInterval(() => {
+      const left = Array.from({ length: 4 }, () => GLYPHS[Math.random() * 4 | 0]).join("");
+      const right = Array.from({ length: 4 }, () => GLYPHS[Math.random() * 4 | 0]).join("");
+      setLogoText(`${left} MOG ${right}`);
+    }, 80);
+  };
+
+  const stopShuffle = () => {
+    clearInterval(shuffleRef.current);
+    shuffleRef.current = null;
+    setLogoText(LOGO_DEFAULT);
+  };
 
   useEffect(() => { localStorage.setItem("mog-source", source); }, [source]);
   useEffect(() => { localStorage.setItem("mog-template", template); }, [template]);
@@ -33,6 +52,7 @@ function App() {
 
     setLoading(true);
     setOutput("");
+    startShuffle();
 
     abortRef.current = new AbortController();
 
@@ -45,6 +65,7 @@ function App() {
       });
 
       if (!res.ok) {
+        stopShuffle();
         setOutput(`░░░ ERROR ${res.status} ░░░\n${await res.text()}`);
         return;
       }
@@ -52,14 +73,17 @@ function App() {
       const reader = res.body.getReader();
       const decoder = new TextDecoder();
       let result = "";
+      let first = true;
 
       while (true) {
         const { done, value } = await reader.read();
         if (done) break;
+        if (first) { stopShuffle(); first = false; }
         result += decoder.decode(value, { stream: true });
         setOutput(result);
       }
     } catch (err) {
+      stopShuffle();
       if (err.name !== "AbortError") {
         setOutput(`░░░ ERROR ░░░\n${err.message}`);
       }
@@ -88,7 +112,7 @@ function App() {
   return (
     <div className={"app" + (loading ? " loading" : "")}>
       <header className="header">
-        <h1>█▓▒░ MOG ░▒▓█</h1>
+        <h1>{logoText}</h1>
         <button
           className="btn"
           onClick={handleSubmit}
