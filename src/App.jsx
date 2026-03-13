@@ -51,6 +51,11 @@ function App() {
     input.click();
   };
 
+  const fillBar = (len, max, width = 20) => {
+    const fill = Math.min(Math.round((len / max) * width), width);
+    return "█".repeat(fill) + "░".repeat(width - fill);
+  };
+
   const loadSample = () => {
     setSource(sampleSource);
     setTemplate(sampleTemplate);
@@ -166,6 +171,7 @@ function App() {
               {source && <button className="btn-clear" onClick={() => setSource("")}>CLEAR</button>}
             </div>
             <div className="column-sub"><button className="link" onClick={() => loadFile(setSource)}>+ Upload file</button></div>
+            <div className="column-fill">{fillBar(source.length, 50000)}</div>
           </div>
           <textarea
             value={source}
@@ -190,6 +196,7 @@ function App() {
               {template && <button className="btn-clear" onClick={() => setTemplate("")}>CLEAR</button>}
             </div>
             <div className="column-sub"><button className="link" onClick={() => loadFile(setTemplate)}>+ Upload file</button></div>
+            <div className="column-fill">{fillBar(template.length, 10000)}</div>
           </div>
           <textarea
             value={template}
@@ -205,7 +212,7 @@ function App() {
               <div className="column-label">░ Output</div>
               {output && <button className="btn-clear" onClick={() => setOutput("")}>CLEAR</button>}
             </div>
-            <div className="column-sub">█▓▒░░░░░░░░░░░░░░░░░░░▒▓█</div>
+            <div className="column-fill">{fillBar(output.length, Math.max(source.length, 1))}</div>
           </div>
           <textarea
             ref={outputRef}

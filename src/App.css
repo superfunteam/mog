@@ -112,6 +112,14 @@ html, body, #root {
   margin-top: 4px;
 }
 
+.column-fill {
+  font-size: 10px;
+  color: var(--light);
+  line-height: 1;
+  margin-top: 6px;
+  letter-spacing: 1px;
+}
+
 .link {
   background: transparent;
   border: none;
