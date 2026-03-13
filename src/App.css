@@ -45,12 +45,6 @@ html, body, #root {
   text-transform: uppercase;
 }
 
-.header-decoration {
-  font-size: 14px;
-  color: var(--mid);
-  letter-spacing: 2px;
-}
-
 /* ░░░ COLUMNS ░░░ */
 .columns {
   display: flex;
@@ -125,6 +119,14 @@ html, body, #root {
 
 .link:hover {
   color: var(--black);
+}
+
+.column-actions {
+  display: flex;
+  gap: 8px;
+  padding: 8px 16px;
+  border-top: 1px solid var(--gray);
+  flex-shrink: 0;
 }
 
 /* ░░░ TEXTAREA ░░░ */
@@ -224,23 +226,14 @@ html, body, #root {
   flex-shrink: 0;
 }
 
-.btn-submit {
-  background: var(--black);
-  color: var(--white);
-  padding: 10px 32px;
-  font-size: 13px;
-  font-weight: 800;
-  letter-spacing: 4px;
-}
-
-.btn-submit:disabled {
+.btn:disabled {
   background: var(--light);
   color: var(--mid);
   cursor: not-allowed;
   outline: none;
 }
 
-.btn-submit:disabled:hover {
+.btn:disabled:hover {
   background: var(--light);
   color: var(--mid);
   outline: none;
@@ -304,10 +297,6 @@ html, body, #root {
   .header h1 {
     font-size: 14px;
     letter-spacing: 4px;
-  }
-
-  .header-decoration {
-    font-size: 11px;
   }
 
   .columns {

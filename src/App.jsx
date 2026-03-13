@@ -89,7 +89,13 @@ function App() {
     <div className={"app" + (loading ? " loading" : "")}>
       <header className="header">
         <h1>█▓▒░ MOG ░▒▓█</h1>
-        <span className="header-decoration">░▒▓ WIMS.VC  ▓▒░</span>
+        <button
+          className="btn"
+          onClick={handleSubmit}
+          disabled={loading || !source.trim() || !template.trim()}
+        >
+          {loading ? "░░░ WORKING ░░░" : "MOG CONTENT"}
+        </button>
       </header>
 
       <div className="columns">
@@ -100,7 +106,7 @@ function App() {
               <div className="column-label">░ Source Content</div>
               {source && <button className="btn-clear" onClick={() => setSource("")}>CLEAR</button>}
             </div>
-            <div className="column-sub">Paste content or <button className="link" onClick={() => loadFile(setSource)}>load a file</button></div>
+            <div className="column-sub"><button className="link" onClick={() => loadFile(setSource)}>+ Upload file</button></div>
           </div>
           <textarea
             value={source}
@@ -124,7 +130,7 @@ function App() {
               <div className="column-label">░ Template Rails</div>
               {template && <button className="btn-clear" onClick={() => setTemplate("")}>CLEAR</button>}
             </div>
-            <div className="column-sub">Paste rails or <button className="link" onClick={() => loadFile(setTemplate)}>load a file</button></div>
+            <div className="column-sub"><button className="link" onClick={() => loadFile(setTemplate)}>+ Upload file</button></div>
           </div>
           <textarea
             value={template}
@@ -141,20 +147,18 @@ function App() {
               {output && <button className="btn-clear" onClick={() => setOutput("")}>CLEAR</button>}
             </div>
             <div className="column-sub">█▓▒░░░░░░░░░░░░░░░░░░░▒▓█</div>
-            <div className="column-actions">
-              <button className="btn" onClick={handleCopy} disabled={!output}>
-                [ COPY ]
-              </button>
-              <button className="btn" onClick={handleSave} disabled={!output}>
-                [ SAVE ]
-              </button>
-            </div>
           </div>
           <textarea
             value={output}
             readOnly
             placeholder="░░░ Output will stream here ░░░"
           />
+          {output && (
+            <div className="column-actions">
+              <button className="btn" onClick={handleCopy}>[ COPY ]</button>
+              <button className="btn" onClick={handleSave}>[ SAVE ]</button>
+            </div>
+          )}
         </div>
       </div>
 
@@ -163,14 +167,7 @@ function App() {
         <span className="footer-status">
           {loading ? "░▒▓ TRANSMOGRIFYING ▓▒░" : <><span className="status-dot" />API READY</>}
         </span>
-        <button
-          className="btn btn-submit"
-          onClick={handleSubmit}
-          disabled={loading || !source.trim() || !template.trim()}
-        >
-          {loading ? "░░░ WORKING ░░░" : "MOG CONTENT"}
-        </button>
-        <span className="footer-decoration">░▒▓</span>
+        <span className="footer-decoration">wims.vc ░▒▓</span>
       </footer>
 
       <nav className="mobile-tabs">
