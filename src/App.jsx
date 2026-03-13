@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import samples from "./samples.js";
+import WelcomeModal from "./WelcomeModal.jsx";
 
 function App() {
   const [source, setSource] = useState(() => localStorage.getItem("mog-source") || "");
@@ -14,6 +15,7 @@ function App() {
   const abortRef = useRef(null);
   const shuffleRef = useRef(null);
   const outputRef = useRef(null);
+  const [showWelcome, setShowWelcome] = useState(() => !localStorage.getItem("mog-welcomed"));
 
   const LOGO_DEFAULT = "█▓▒░ MOG ░▒▓█";
   const GLYPHS = ["█", "▓", "▒", "░"];
@@ -214,6 +216,7 @@ function App() {
               <div className="column-label">░ Output</div>
               {output && <button className="btn-clear" onClick={() => setOutput("")}>CLEAR</button>}
             </div>
+            <div className="column-sub"><span className="link-static">Ready for input</span></div>
             <div className="column-fill">{fillBar(output.length, Math.max(source.length, 1))}</div>
           </div>
           <textarea
@@ -252,6 +255,13 @@ function App() {
           {activeTab === 2 ? "█" : "░"} OUT
         </button>
       </nav>
+
+      {showWelcome && (
+        <WelcomeModal onDismiss={() => {
+          setShowWelcome(false);
+          localStorage.setItem("mog-welcomed", "1");
+        }} />
+      )}
 
       {showSamplePicker && (
         <div className="sample-overlay" onClick={() => setShowSamplePicker(false)}>
