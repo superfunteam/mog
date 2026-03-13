@@ -82,7 +82,7 @@ function App() {
     <div className={"app" + (loading ? " loading" : "")}>
       <header className="header">
         <h1>█▓▒░ MOG ░▒▓█</h1>
-        <span className="header-decoration">░▒▓ TRANSMOGRIFY ▓▒░</span>
+        <span className="header-decoration">░▒▓ WIMS.VC  ▓▒░</span>
       </header>
 
       <div className="columns">
