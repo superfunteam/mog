@@ -1,12 +1,17 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 function App() {
-  const [source, setSource] = useState("");
-  const [template, setTemplate] = useState("");
-  const [output, setOutput] = useState("");
+  const [source, setSource] = useState(() => localStorage.getItem("mog-source") || "");
+  const [template, setTemplate] = useState(() => localStorage.getItem("mog-template") || "");
+  const [output, setOutput] = useState(() => localStorage.getItem("mog-output") || "");
   const [loading, setLoading] = useState(false);
-  const [forbidReorder, setForbidReorder] = useState(false);
+  const [forbidReorder, setForbidReorder] = useState(() => localStorage.getItem("mog-forbidReorder") === "true");
   const abortRef = useRef(null);
+
+  useEffect(() => { localStorage.setItem("mog-source", source); }, [source]);
+  useEffect(() => { localStorage.setItem("mog-template", template); }, [template]);
+  useEffect(() => { localStorage.setItem("mog-output", output); }, [output]);
+  useEffect(() => { localStorage.setItem("mog-forbidReorder", forbidReorder); }, [forbidReorder]);
 
   const loadFile = (setter) => {
     const input = document.createElement("input");
@@ -90,7 +95,10 @@ function App() {
         {/* COLUMN 1 — SOURCE */}
         <div className="column">
           <div className="column-header">
-            <div className="column-label">░ Source Content</div>
+            <div className="column-label-row">
+              <div className="column-label">░ Source Content</div>
+              {source && <button className="btn-clear" onClick={() => setSource("")}>CLEAR</button>}
+            </div>
             <div className="column-decoration">█▓▒░░░░░░░░░░░░░░░░░░░▒▓█</div>
             <div className="column-actions">
               <button className="btn btn-file" onClick={() => loadFile(setSource)}>
@@ -116,7 +124,10 @@ function App() {
         {/* COLUMN 2 — TEMPLATE RAILS */}
         <div className="column">
           <div className="column-header">
-            <div className="column-label">░ Template Rails</div>
+            <div className="column-label-row">
+              <div className="column-label">░ Template Rails</div>
+              {template && <button className="btn-clear" onClick={() => setTemplate("")}>CLEAR</button>}
+            </div>
             <div className="column-decoration">█▓▒░░░░░░░░░░░░░░░░░░░▒▓█</div>
             <div className="column-actions">
               <button className="btn btn-file" onClick={() => loadFile(setTemplate)}>
@@ -134,7 +145,10 @@ function App() {
         {/* COLUMN 3 — OUTPUT */}
         <div className="column">
           <div className="column-header">
-            <div className="column-label">░ Output</div>
+            <div className="column-label-row">
+              <div className="column-label">░ Output</div>
+              {output && <button className="btn-clear" onClick={() => setOutput("")}>CLEAR</button>}
+            </div>
             <div className="column-decoration">█▓▒░░░░░░░░░░░░░░░░░░░▒▓█</div>
             <div className="column-actions">
               <button className="btn" onClick={handleCopy} disabled={!output}>
