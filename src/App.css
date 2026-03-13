@@ -45,6 +45,12 @@ html, body, #root {
   text-transform: uppercase;
 }
 
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
 /* ░░░ COLUMNS ░░░ */
 .columns {
   display: flex;

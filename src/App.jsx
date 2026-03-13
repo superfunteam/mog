@@ -1,4 +1,6 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
+import sampleSource from "./sample-source.js";
+import sampleTemplate from "./sample-template.js";
 
 function App() {
   const [source, setSource] = useState(() => localStorage.getItem("mog-source") || "");
@@ -47,6 +49,12 @@ function App() {
     input.click();
   };
 
+  const loadSample = () => {
+    setSource(sampleSource);
+    setTemplate(sampleTemplate);
+    setOutput("");
+  };
+
   const handleSubmit = async () => {
     if (!source.trim() || !template.trim()) return;
 
@@ -74,14 +82,29 @@ function App() {
       const decoder = new TextDecoder();
       let result = "";
       let first = true;
+      let pending = "";
+      let rafId = null;
+
+      const flush = () => {
+        if (pending) {
+          result += pending;
+          pending = "";
+          setOutput(result);
+        }
+        rafId = requestAnimationFrame(flush);
+      };
+      rafId = requestAnimationFrame(flush);
 
       while (true) {
         const { done, value } = await reader.read();
         if (done) break;
         if (first) { stopShuffle(); first = false; }
-        result += decoder.decode(value, { stream: true });
-        setOutput(result);
+        pending += decoder.decode(value, { stream: true });
       }
+
+      cancelAnimationFrame(rafId);
+      result += pending;
+      setOutput(result);
     } catch (err) {
       stopShuffle();
       if (err.name !== "AbortError") {
@@ -113,13 +136,16 @@ function App() {
     <div className={"app" + (loading ? " loading" : "")}>
       <header className="header">
         <h1>{logoText}</h1>
-        <button
-          className="btn"
-          onClick={handleSubmit}
-          disabled={loading || !source.trim() || !template.trim()}
-        >
-          {loading ? "░░░ WORKING ░░░" : "MOG CONTENT"}
-        </button>
+        <div className="header-actions">
+          <button className="btn-clear" onClick={loadSample} disabled={loading}>Sample</button>
+          <button
+            className="btn"
+            onClick={handleSubmit}
+            disabled={loading || !source.trim() || !template.trim()}
+          >
+            {loading ? "░░░ WORKING ░░░" : "MOG CONTENT"}
+          </button>
+        </div>
       </header>
 
       <div className="columns">
