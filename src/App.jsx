@@ -234,13 +234,13 @@ function App() {
 
       <nav className="mobile-tabs">
         <button className={`mobile-tab ${activeTab === 0 ? "mobile-tab-active" : ""}`} onClick={() => setActiveTab(0)}>
-          ░ SRC
+          {activeTab === 0 ? "█" : "░"} SRC
         </button>
         <button className={`mobile-tab ${activeTab === 1 ? "mobile-tab-active" : ""}`} onClick={() => setActiveTab(1)}>
-          █ RAILS
+          {activeTab === 1 ? "█" : "░"} RAILS
         </button>
         <button className={`mobile-tab ${activeTab === 2 ? "mobile-tab-active" : ""}`} onClick={() => setActiveTab(2)}>
-          ▒ OUT
+          {activeTab === 2 ? "█" : "░"} OUT
         </button>
       </nav>
     </div>
