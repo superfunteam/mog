@@ -105,16 +105,26 @@ html, body, #root {
   color: var(--black);
 }
 
-.column-decoration {
+.column-sub {
   font-size: 10px;
   color: var(--mid);
   line-height: 1;
+  margin-top: 4px;
 }
 
-.column-actions {
-  display: flex;
-  gap: 8px;
-  margin-top: 8px;
+.link {
+  background: transparent;
+  border: none;
+  color: var(--mid);
+  font-family: var(--font);
+  font-size: 10px;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0;
+}
+
+.link:hover {
+  color: var(--black);
 }
 
 /* ░░░ TEXTAREA ░░░ */
@@ -204,18 +214,6 @@ html, body, #root {
   color: var(--black);
 }
 
-.btn-file {
-  background: transparent;
-  color: var(--mid);
-  outline: 1px solid var(--light);
-}
-
-.btn-file:hover {
-  color: var(--black);
-  outline: 1px solid var(--black);
-  background: transparent;
-}
-
 /* ░░░ FOOTER / SUBMIT ░░░ */
 .footer {
   border-top: 2px solid var(--black);
@@ -286,4 +284,97 @@ html, body, #root {
 .loading .footer-status {
   animation: blink 1s infinite;
   color: var(--black);
+}
+
+/* ░░░ MOBILE TAB BAR ░░░ */
+.mobile-tabs {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .app {
+    height: 100dvh;
+  }
+
+  .header {
+    padding: 10px 16px;
+    padding-top: calc(10px + env(safe-area-inset-top));
+  }
+
+  .header h1 {
+    font-size: 14px;
+    letter-spacing: 4px;
+  }
+
+  .header-decoration {
+    font-size: 11px;
+  }
+
+  .columns {
+    flex-direction: column;
+  }
+
+  .column {
+    display: none;
+    flex: 1;
+    min-height: 0;
+  }
+
+  .column.column-active {
+    display: flex;
+  }
+
+  .column:not(:last-child) {
+    border-right: none;
+  }
+
+  .footer {
+    display: none;
+  }
+
+  .mobile-tabs {
+    display: flex;
+    border-top: 2px solid var(--black);
+    flex-shrink: 0;
+    padding-bottom: env(safe-area-inset-bottom);
+    background: var(--white);
+  }
+
+  .mobile-tab {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--mid);
+    font-family: var(--font);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    padding: 14px 0;
+    cursor: pointer;
+    text-transform: uppercase;
+  }
+
+  .mobile-tab:not(:last-child) {
+    border-right: 1px solid var(--gray);
+  }
+
+  .mobile-tab-active {
+    color: var(--black);
+    background: var(--accent);
+  }
+
+  .mobile-tab-mog {
+    color: var(--white);
+    background: var(--black);
+  }
+
+  .mobile-tab-mog:disabled {
+    color: var(--mid);
+    background: var(--gray);
+  }
+
+  .column textarea {
+    font-size: 14px;
+    padding: 12px;
+  }
 }
