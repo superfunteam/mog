@@ -5,18 +5,19 @@
 }
 
 :root {
-  --black: #0a0a0a;
-  --white: #f0f0f0;
-  --gray: #2a2a2a;
-  --mid: #666;
-  --light: #ccc;
+  --black: #3b3228;
+  --white: #fdf6e3;
+  --gray: #e8dcc8;
+  --mid: #a89a84;
+  --light: #d4c5a9;
+  --accent: #f5e6d0;
   --font: "JetBrains Mono", monospace;
 }
 
 html, body, #root {
   height: 100%;
-  background: var(--black);
-  color: var(--white);
+  background: var(--white);
+  color: var(--black);
   font-family: var(--font);
 }
 
@@ -30,7 +31,7 @@ html, body, #root {
 /* ░░░ HEADER ░░░ */
 .header {
   padding: 12px 20px;
-  border-bottom: 2px solid var(--white);
+  border-bottom: 2px solid var(--black);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -65,7 +66,7 @@ html, body, #root {
 }
 
 .column:not(:last-child) {
-  border-right: 2px solid var(--white);
+  border-right: 2px solid var(--black);
 }
 
 .column-header {
@@ -98,8 +99,8 @@ html, body, #root {
 .column textarea {
   flex: 1;
   width: 100%;
-  background: var(--black);
-  color: var(--white);
+  background: var(--white);
+  color: var(--black);
   border: none;
   outline: none;
   resize: none;
@@ -110,17 +111,17 @@ html, body, #root {
 }
 
 .column textarea::placeholder {
-  color: var(--gray);
+  color: var(--mid);
 }
 
 .column textarea:focus {
-  background: #111;
+  background: var(--accent);
 }
 
 /* ░░░ BUTTONS ░░░ */
 .btn {
-  background: var(--white);
-  color: var(--black);
+  background: var(--black);
+  color: var(--white);
   border: none;
   padding: 4px 12px;
   font-family: var(--font);
@@ -133,31 +134,31 @@ html, body, #root {
 }
 
 .btn:hover {
-  background: var(--black);
-  color: var(--white);
-  outline: 2px solid var(--white);
+  background: var(--white);
+  color: var(--black);
+  outline: 2px solid var(--black);
 }
 
 .btn:active {
-  background: var(--mid);
+  background: var(--light);
   color: var(--black);
 }
 
 .btn-file {
   background: transparent;
   color: var(--mid);
-  outline: 1px solid var(--gray);
+  outline: 1px solid var(--light);
 }
 
 .btn-file:hover {
-  color: var(--white);
-  outline: 1px solid var(--white);
+  color: var(--black);
+  outline: 1px solid var(--black);
   background: transparent;
 }
 
 /* ░░░ FOOTER / SUBMIT ░░░ */
 .footer {
-  border-top: 2px solid var(--white);
+  border-top: 2px solid var(--black);
   padding: 12px 20px;
   display: flex;
   align-items: center;
@@ -166,8 +167,8 @@ html, body, #root {
 }
 
 .btn-submit {
-  background: var(--white);
-  color: var(--black);
+  background: var(--black);
+  color: var(--white);
   padding: 10px 32px;
   font-size: 13px;
   font-weight: 800;
@@ -175,14 +176,14 @@ html, body, #root {
 }
 
 .btn-submit:disabled {
-  background: var(--gray);
+  background: var(--light);
   color: var(--mid);
   cursor: not-allowed;
   outline: none;
 }
 
 .btn-submit:disabled:hover {
-  background: var(--gray);
+  background: var(--light);
   color: var(--mid);
   outline: none;
 }
@@ -195,7 +196,7 @@ html, body, #root {
 
 .footer-decoration {
   font-size: 14px;
-  color: var(--gray);
+  color: var(--light);
 }
 
 /* ░░░ LOADING ░░░ */
@@ -206,5 +207,5 @@ html, body, #root {
 
 .loading .footer-status {
   animation: blink 1s infinite;
-  color: var(--white);
+  color: var(--black);
 }
