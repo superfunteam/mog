@@ -147,14 +147,14 @@ function App() {
       <footer className="footer">
         <span className="footer-decoration">▓▒░</span>
         <span className="footer-status">
-          {loading ? "░▒▓ TRANSMOGRIFYING ▓▒░" : "READY"}
+          {loading ? "░▒▓ TRANSMOGRIFYING ▓▒░" : <><span className="status-dot" />API READY</>}
         </span>
         <button
           className="btn btn-submit"
           onClick={handleSubmit}
           disabled={loading || !source.trim() || !template.trim()}
         >
-          {loading ? "░░░ WORKING ░░░" : "TRANSMOGRIFY"}
+          {loading ? "░░░ WORKING ░░░" : "MOG CONTENT"}
         </button>
         <span className="footer-decoration">░▒▓</span>
       </footer>

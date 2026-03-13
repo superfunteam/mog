@@ -199,6 +199,24 @@ html, body, #root {
   color: var(--light);
 }
 
+/* ░░░ STATUS DOT ░░░ */
+.status-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #4a7;
+  margin-right: 8px;
+  vertical-align: middle;
+  box-shadow: 0 0 4px #4a7, 0 0 8px #4a744;
+  animation: glow 2s ease-in-out infinite;
+}
+
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 4px #4a7, 0 0 8px #4a744; }
+  50% { box-shadow: 0 0 6px #4a7, 0 0 14px #4a766; }
+}
+
 /* ░░░ LOADING ░░░ */
 @keyframes blink {
   0%, 100% { opacity: 1; }
