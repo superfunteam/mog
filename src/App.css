@@ -375,16 +375,6 @@ html, body, #root {
     background: var(--accent);
   }
 
-  .mobile-tab-mog {
-    color: var(--white);
-    background: var(--black);
-  }
-
-  .mobile-tab-mog:disabled {
-    color: var(--mid);
-    background: var(--gray);
-  }
-
   .column textarea {
     font-size: 14px;
     padding: 12px;

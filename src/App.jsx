@@ -239,13 +239,6 @@ function App() {
         <button className={`mobile-tab ${activeTab === 1 ? "mobile-tab-active" : ""}`} onClick={() => setActiveTab(1)}>
           █ RAILS
         </button>
-        <button
-          className="mobile-tab mobile-tab-mog"
-          onClick={handleSubmit}
-          disabled={loading || !source.trim() || !template.trim()}
-        >
-          {loading ? "▓▒░" : "▓ MOG"}
-        </button>
         <button className={`mobile-tab ${activeTab === 2 ? "mobile-tab-active" : ""}`} onClick={() => setActiveTab(2)}>
           ▒ OUT
         </button>
