@@ -1,6 +1,5 @@
 import { useState, useRef, useEffect, useCallback } from "react";
-import sampleSource from "./sample-source.js";
-import sampleTemplate from "./sample-template.js";
+import samples from "./samples.js";
 import WelcomeModal from "./WelcomeModal.jsx";
 
 function App() {
@@ -12,6 +11,7 @@ function App() {
   const [activeTab, setActiveTab] = useState(0);
   const [logoText, setLogoText] = useState("█▓▒░ MOG ░▒▓█");
   const [streaming, setStreaming] = useState(false);
+  const [showSamplePicker, setShowSamplePicker] = useState(false);
   const abortRef = useRef(null);
   const shuffleRef = useRef(null);
   const outputRef = useRef(null);
@@ -58,10 +58,12 @@ function App() {
     return "█".repeat(fill) + "░".repeat(width - fill);
   };
 
-  const loadSample = () => {
-    setSource(sampleSource);
-    setTemplate(sampleTemplate);
+  const loadSample = (index) => {
+    const s = samples[index];
+    setSource(s.source);
+    setTemplate(s.template);
     setOutput("");
+    setShowSamplePicker(false);
   };
 
   const handleSubmit = async () => {
@@ -153,7 +155,7 @@ function App() {
       <header className="header">
         <h1>{logoText}</h1>
         <div className="header-actions">
-          <button className="btn-clear" onClick={loadSample} disabled={loading}>Sample</button>
+          <button className="btn-clear" onClick={() => setShowSamplePicker(true)} disabled={loading}>Sample</button>
           <button
             className="btn"
             onClick={handleSubmit}
@@ -259,6 +261,25 @@ function App() {
           setShowWelcome(false);
           localStorage.setItem("mog-welcomed", "1");
         }} />
+      )}
+
+      {showSamplePicker && (
+        <div className="sample-overlay" onClick={() => setShowSamplePicker(false)}>
+          <div className="sample-picker" onClick={(e) => e.stopPropagation()}>
+            <div className="sample-picker-header">
+              <span>░ PICK A SAMPLE</span>
+              <button className="btn-clear" onClick={() => setShowSamplePicker(false)}>✕</button>
+            </div>
+            <div className="sample-picker-list">
+              {samples.map((s, i) => (
+                <button key={i} className="sample-option" onClick={() => loadSample(i)}>
+                  <span className="sample-option-name">{s.name}</span>
+                  <span className="sample-option-desc">{s.description}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );
